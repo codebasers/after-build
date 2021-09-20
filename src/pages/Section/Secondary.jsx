@@ -10,9 +10,11 @@ function Charlie(props) {
 	return (
 		<main>
 			<h1>Secondary Component</h1>
-			<p>Path: {pathname}</p>
-			<p>Simple route in its own component.</p>
-			<p>File structure includes other pages in the same location.</p>
+			<p className='loud'>Path: {pathname}</p>
+			<p>Multi Path Route targeting one component.</p>
+			<p>File structure includes other pages (components) in the same file location.</p>
+			<p>This structure requires the after-build script to look up the path in the route file, then look up the 
+			import so it can read the edit date on the component file.</p>
 		</main>
 	);
 }

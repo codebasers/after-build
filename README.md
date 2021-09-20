@@ -1,10 +1,12 @@
-# Getting Started with Create React App
+# Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Purpose
 
-In the project directory, you can run:
+This repo demonstrates the inclusion of a script that is automatically run after build.
+You can run any activity in the after-build.js script.
+In this example we add preload tags to the build index.html and we also generate a sitemap.xml by reading the routes in teh app.
 
 ### `npm run build`
 
@@ -24,3 +26,4 @@ The after-build.js script does not look for path arrays in route declarations. T
 ```js
 <Route path={["/tertiary/", "/quaternary/"]} component={Secondary}/>
 ```
+
