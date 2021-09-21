@@ -16,8 +16,8 @@ Check the build folder for index.html (and look in it for injected preload tags)
 **Run script directly** - You can also run `node ./src/tools/after-build.js` to run the script directly.
 
 :imp: WARNING! - The Preload tool is designed to run on a cleanly built index.html. 
-Running directly repeatedly will multiply injected tags in the index.html file. 
-Clear the index.html file if it grows too big by running `npm run build` once in a while. 
+Running directly and repeatedly will multiply injected tags in the index.html file. 
+Clear the index.html file, if it grows too big and slows down, by running `npm run build` once in a while. 
 
 **Script Output** - When the script runs it will output some simple processing data...
 
@@ -30,15 +30,15 @@ Clear the index.html file if it grows too big by running `npm run build` once in
 **Update package.json** - Add the following to the build command in your package.json file;
 ```javascript
 // Add the following in the scripts section to the build command
-' && node ./src/tools/after-build.js'
+&& node ./src/tools/after-build.js
 
 // so it looks like this..
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && node ./src/tools/after-build.js",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
+"scripts": {
+	"start": "react-scripts start",
+	"build": "react-scripts build && node ./src/tools/after-build.js",
+	"test": "react-scripts test",
+	"eject": "react-scripts eject"
+},
 ```
 
 
@@ -60,7 +60,7 @@ Injects preload tags into the index.html file built during the build process.
  
 
 ## Sitemap
-Generates a sitemap by reading your route file and building a sitemap.cml file including file edit dates.
+Generates a sitemap by reading your route file and building a sitemap.xml file including file edit dates.
 
 **domain** - Set this to the domain that will appear in the links within the sitemap.
 
@@ -82,7 +82,7 @@ Reading the files relies on the accuracy of the RegExp.
 
 
 
-### Find-HTML-Meta-Tags-Static
+### Find-HTML-Meta-Tags-Static (Preloads)
 
 Find static content tags in built index.html.
 ```js
@@ -104,7 +104,7 @@ Copy the contents of your index.html file and paste it into the Text Tests area 
 
 
 
-### Find-React-Route-Paths
+### Find-React-Route-Paths (Sitemap)
 
 Looks for the path attribute in routes.
 ```js
@@ -120,7 +120,7 @@ Copy the contents of your routes file (probably App.js) into the Text Tests area
 
 
 
-### React-Find-Route-Import-File
+### React-Find-Route-Import-File (Sitemap)
 
 Looks for the path to actual Component code files.
 ```js
@@ -142,7 +142,7 @@ You should see something like this...
 
 
 
-### Find-React-Route-Components
+### Find-React-Route-Components (Sitemap)
 
 Looks for the React Component used in each Route.
 ```js
