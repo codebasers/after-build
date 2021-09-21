@@ -53,7 +53,7 @@ const shadyBG = {
 
 // Read in index.html and look for js and css assets to preload
 const pathToEntry = './build/index.html';
-const bundlesRegExp = /\/static\/\w+\/[\w-]+\.[a-z0-9]+(\.[a-z0-9]+)*\.\w{2,3}/g;
+const bundlesRegExp = /\/static\/\w+\/[\w-]+\.[a-z0-9]+(\.[a-z0-9]+)*\.\w{2,3}/gim;		// regexr.com/6605e
 const builtHTMLContent = fs.readFileSync(pathToEntry).toString();
 const links = builtHTMLContent.match(bundlesRegExp);
 
@@ -128,7 +128,7 @@ if(runFileWritePreLoad) {
 																		   
  */
 const domain = 'https://your-domain.com.au';
-const routesFileTargetPath = './build/sitemap.xml';										// full path of file to be created
+const builtSitemapTargetPath = './build/sitemap.xml';										// full path of file to be created
 const routesFile = './src/App.js';														// js file containing the route switch
 const readRoutesFile = fs.readFileSync(routesFile).toString();							// read the contents of the route file
 const routesRegExp = /(?<=path=(?:'|"))([^'"]+)/gim;									// see https://regexr.com/65tsp
@@ -143,8 +143,8 @@ console.log(`\n\nBUILDING SITEMAP FOR ${shadyBG['magenta']}`, `  \x1b[97m${domai
 const getFileUpdatedDate = (pathKey) => {
 	const startPath = './src/pages/';
 	// use the pathKey to find the import statement so we can get the directory structure to find the actual file to then get its edit date.  :|
-	const pathKeyImportRegExpString = `(?<=import\\s+${pathKey}\\s*from\\s'[\\.]+\\/pages\\/)([\\/A-Z]+)`; 	// regexr.com/65u02
-	const pathKeyImportRegExp = new RegExp(pathKeyImportRegExpString,"gim");
+	const importPathRegExp = `(?<=import\\s+${pathKey}\\s*from\\s'[\\.]+\\/pages\\/)([\\/A-Z]+)`; 	// regexr.com/65u02
+	const pathKeyImportRegExp = new RegExp(importPathRegExp,"gim");
 	const importPathArray = readRoutesFile.match(pathKeyImportRegExp);					// extract the path from the route file contents. e.g. GraphicDesign/DeConsult
 
 	if(!importPathArray) {
@@ -195,8 +195,8 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 
 			console.log(`\n  Path:           ${shadyFG['cyan']}`, `${path}`);
 
-			const regExString = `(?<=path=('|")\\/${path}(\\/)?('|")\\s+(component={|.*\\sreturn\\s<))([^\\s}]+)`;		// regexr.com/65ttn		- Gets Components for each route
-			const componentRegEx = new RegExp(regExString, "gim");
+			const routeComponentRegExp = `(?<=path=('|")\\/${path}(\\/)?('|")\\s+(component={|.*\\sreturn\\s<))([^\\s}]+)`;		// regexr.com/65ttn		- Gets Components for each route
+			const componentRegEx = new RegExp(routeComponentRegExp, "gim");
 			let thisComponent = readRoutesFile.match(componentRegEx);					// extract the components used for each path from the route file contents
 			let pagePriority = '0.5';
 
@@ -227,7 +227,7 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 
 
 if(runFileWriteSitemap) {
-	fs.writeFileSync(routesFileTargetPath, sitemap);
+	fs.writeFileSync(builtSitemapTargetPath, sitemap);
 } else {
 	console.log(`ALERT: ${shadyBG['magenta']}`, 'ACTUAL FILE WRITE SKIPPED for ROUTES');
 }
