@@ -11,7 +11,8 @@ function Bravo(props) {
 					props to the component (more importantly that the regexp will figure out the component and file path).
 					See line 21 below.
 					</p>
-				<p>Later versions of react-router will have different methods of achieving this. Check out this interesting piece on <a href='https://reacttraining.com/blog/react-router-v6-pre/' target='_blank'>React Router v6 Preview</a>.</p>
+				<p>Later versions of react-router will have different methods of achieving this. 
+					Check out this interesting piece on <a href='https://reacttraining.com/blog/react-router-v6-pre/' target='_blank' rel='noreferrer'>React Router v6 Preview</a>.</p>
 				<img src={RoutesSwitchCode} alt='Routes Switch Code from App.js' />
 			</div>
 		</main>
